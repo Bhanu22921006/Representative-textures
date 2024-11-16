@@ -1,0 +1,8 @@
+clc;
+clear;
+cs = crystalSymmetry('432');
+ss = specimenSymmetry('triclinic');
+ori = orientation('Euler', [90,35,45]*degree,cs,ss);     % change the Euler angle depending on the orientation
+odf_ori = unimodalODF(ori,'halfwidth',15*degree);  %create the ODF
+ori1= calcOrientations(odf_ori, 5000);                      %discretize the ODF to get 5000 single orientations     
+plot(odf_ori,'phi2',[0 45 65]* degree,'contour','antipodal','linewidth',2,'colorbar');   %plot the ODF sections
